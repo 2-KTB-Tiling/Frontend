@@ -1,9 +1,9 @@
-import Header from "./components/common/Header";
+import { Outlet } from "react-router";
 
 function App() {
   return (
     <>
-      <Header />
+      <Outlet />
     </>
   );
 }
