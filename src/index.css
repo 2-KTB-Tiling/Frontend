@@ -9,5 +9,5 @@ body {
 
 #root {
   @apply mx-auto;
-  @apply w-full max-w-5xl h-full;
+  @apply w-full h-full;
 }
