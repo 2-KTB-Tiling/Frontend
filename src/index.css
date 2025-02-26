@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  @apply w-screen h-screen;
+}
+
+#root {
+  @apply mx-auto;
+  @apply w-full max-w-5xl h-full;
+}
