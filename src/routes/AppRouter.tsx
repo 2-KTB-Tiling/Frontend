@@ -4,6 +4,7 @@ import { PATH } from "../constants/routes";
 import LoginPage from "../pages/Login";
 import ChattingPage from "../pages/Chatting";
 import WithHeader from "../layouts/WithHeader";
+import EditChatPage from "../pages/EditChat";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -17,6 +18,10 @@ export default function AppRouter() {
             {
               index: true,
               element: <ChattingPage />,
+            },
+            {
+              path: PATH.EDIT,
+              element: <EditChatPage />,
             },
           ],
         },

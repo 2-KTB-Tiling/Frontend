@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialChattings: Chat[] = [
   {
+    id: uuidv4(),
     type: -1,
     content: `
 # 오늘의 TIL (Today I Learned)
@@ -40,14 +41,17 @@ fetch API와 Markdown을 활용하면, 서버에서 동적으로 콘텐츠를 �
 `,
   },
   {
+    id: uuidv4(),
     type: 1,
     content: "이거 수정해줘.",
   },
   {
+    id: uuidv4(),
     type: 1,
     content: "다시 수정해줘.",
   },
   {
+    id: uuidv4(),
     type: -1,
     content: `
       # 오늘의 TIL
@@ -88,11 +92,11 @@ export default function ChattingPage() {
           <h1 className="font-bold">TILing</h1>
         </div>
         <ul className="flex flex-col gap-6 w-full">
-          {chattings.map(({ type, content }) =>
+          {chattings.map(({ id, type, content }) =>
             type === 1 ? (
-              <Chatting key={uuidv4()} content={content} />
+              <Chatting key={id} content={content} />
             ) : (
-              <Viewer key={uuidv4()} content={content} />
+              <Viewer key={id} id={id} content={content} />
             )
           )}
         </ul>
