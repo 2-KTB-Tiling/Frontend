@@ -1,6 +1,6 @@
 import Markdown from "react-markdown";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 
 type ViewerType = {
@@ -21,7 +21,7 @@ export default function Viewer({ content }: ViewerType) {
                 {...rest}
                 PreTag="div"
                 language={match[1]}
-                style={materialDark}
+                style={atomDark}
               >
                 {String(children).replace(/\n$/, "")}
               </SyntaxHighlighter>

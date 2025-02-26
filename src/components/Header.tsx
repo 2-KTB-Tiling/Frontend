@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { PATH } from "../../constants/routes";
+import { PATH } from "../constants/routes";
 
 export default function Header() {
   return (

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Form from "../components/Form";
 import { Chat } from "../types/chat";
 import Chatting from "../components/Chatting";
-import Viewer from "../components/common/Viewer";
+import Viewer from "../components/Viewer";
 import { v4 as uuidv4 } from "uuid";
 
 const initialChattings: Chat[] = [
