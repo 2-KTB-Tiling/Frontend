@@ -13,11 +13,11 @@ export default function Form({ value, onChange, addChat }: FormType) {
 
   const submitMessage = () => {
     // 메시지 제출 로직 (예: API 호출)
-    console.log(value);
     addChat({
       type: 1,
       content: value,
     });
+
     // 제출 후 값 초기화 및 높이 리셋
     onChange("");
     if (textareaRef.current) {

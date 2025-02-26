@@ -1,5 +1,5 @@
 import { PiNotebookBold } from "react-icons/pi";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Form from "../components/Form";
 import { Chat } from "../types/chat";
 import Chatting from "../components/Chatting";
@@ -61,27 +61,43 @@ fetch API와 Markdown을 활용하면, 서버에서 동적으로 콘텐츠를 �
 ];
 
 export default function ChattingPage() {
+  // 스크롤 컨테이너용 ref
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const [value, setValue] = useState("");
   const [chattings, setChattings] = useState<Chat[]>(initialChattings);
 
   const addChatting = (newChat: Chat) => {
     setChattings((prev) => [...prev, newChat]);
   };
+
+  // chattings 배열이 변경될 때마다 스크롤을 가장 아래로 이동
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [chattings]);
   return (
-    <main className="flex flex-col items-center mx-auto pt-12 pb-8 max-w-3xl w-full min-h-full h-full">
-      <div className="flex items-center gap-2 mb-20 text-4xl">
-        <PiNotebookBold />
-        <h1 className="font-bold">TILing</h1>
+    <main className="flex flex-col items-center mx-auto pt-12 max-w-3xl w-full min-h-full h-full">
+      <div ref={containerRef} className="grow w-full overflow-y-auto">
+        <div className="flex justify-center items-center gap-2 mb-20 text-4xl">
+          <PiNotebookBold />
+          <h1 className="font-bold">TILing</h1>
+        </div>
+        <ul className="flex flex-col gap-6 w-full">
+          {chattings.map(({ type, content }) =>
+            type === 1 ? (
+              <Chatting key={uuidv4()} content={content} />
+            ) : (
+              <Viewer key={uuidv4()} content={content} />
+            )
+          )}
+        </ul>
       </div>
-      <ul className="grow flex flex-col gap-6 w-full">
-        {chattings.map(({ type, content }) =>
-          type === 1 ? (
-            <Chatting key={uuidv4()} content={content} />
-          ) : (
-            <Viewer key={uuidv4()} content={content} />
-          )
-        )}
-      </ul>
+
       <Form value={value} onChange={setValue} addChat={addChatting} />
     </main>
   );
