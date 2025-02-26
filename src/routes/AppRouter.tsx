@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "../App";
 import { PATH } from "../constants/routes";
-import Login from "../pages/Login";
-import Chatting from "../pages/Chatting";
+import LoginPage from "../pages/Login";
+import ChattingPage from "../pages/Chatting";
 import WithHeader from "../layouts/WithHeader";
 
 export default function AppRouter() {
@@ -16,13 +16,13 @@ export default function AppRouter() {
           children: [
             {
               index: true,
-              element: <Chatting />,
+              element: <ChattingPage />,
             },
           ],
         },
         {
           path: PATH.LOGIN,
-          element: <Login />,
+          element: <LoginPage />,
         },
       ],
     },

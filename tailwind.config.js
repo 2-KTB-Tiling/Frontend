@@ -6,7 +6,7 @@ export default {
       colors: {
         accent: "#4F46E5",
         border: "#CBD5E1",
-        "chat-bg": "#F8FAFC",
+        "chat-bg": "#EEF2FF",
         "dark-text": "#475569",
         "light-text": "#94A3B8",
       },

@@ -1,7 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import { PiNotebookBold } from "react-icons/pi";
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <main className="flex flex-col justify-center items-center gap-20 h-full">
       <header className="flex items-center gap-2 text-4xl">

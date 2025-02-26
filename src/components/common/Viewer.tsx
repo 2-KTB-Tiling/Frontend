@@ -9,7 +9,7 @@ type ViewerType = {
 
 export default function Viewer({ content }: ViewerType) {
   return (
-    <section className="prose p-4 max-w-2xl w-full bg-chat-bg rounded-lg">
+    <li className="prose p-4 max-w-2xl w-full bg-chat-bg rounded-lg">
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -35,6 +35,6 @@ export default function Viewer({ content }: ViewerType) {
       >
         {content}
       </Markdown>
-    </section>
+    </li>
   );
 }

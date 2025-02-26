@@ -1,17 +1,23 @@
 import { useRef } from "react";
 import { FaCircleArrowUp } from "react-icons/fa6";
+import { Chat } from "../types/chat";
 
 type FormType = {
   value: string;
   onChange: (value: string) => void;
+  addChat: (newChat: Chat) => void;
 };
 
-export default function Form({ value, onChange }: FormType) {
+export default function Form({ value, onChange, addChat }: FormType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const submitMessage = () => {
     // 메시지 제출 로직 (예: API 호출)
     console.log(value);
+    addChat({
+      type: 1,
+      content: value,
+    });
     // 제출 후 값 초기화 및 높이 리셋
     onChange("");
     if (textareaRef.current) {
@@ -29,7 +35,7 @@ export default function Form({ value, onChange }: FormType) {
   };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // Shift 키 없이 Enter 누르면 제출, Shift+Enter는 기본 동작(줄바꿈)
-    if (e.key === "Enter" && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       submitMessage();
     }
