@@ -1,5 +1,5 @@
 # 1️⃣ 빌드 스테이지 (Build Stage)
-FROM node:18-alpine AS builder
+FROM node:20-alpine as builder
 
 # 작업 디렉토리 설정
 WORKDIR /app
