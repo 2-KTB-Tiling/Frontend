@@ -14,7 +14,6 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                wipeWorkspace()  // ✅ script 블록 밖에서 실행
                 git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/2-KTB-Tiling/python-ai-deploy.git'
             }
         }
@@ -56,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker build -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
+                    docker build --no-cache -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
                     docker push ${DOCKER_HUB_REPO}:${NEW_TAG}
                     """
                 }
