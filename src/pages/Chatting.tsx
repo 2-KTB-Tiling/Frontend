@@ -66,7 +66,7 @@ export default function ChattingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [value, setValue] = useState("");
-  const [chattings, setChattings] = useState<Chat[]>(initialChattings);
+  const [chattings, setChattings] = useState<Chat[]>([]);
 
   const addChatting = (newChat: Chat) => {
     setChattings((prev) => [...prev, newChat]);
@@ -81,6 +81,18 @@ export default function ChattingPage() {
       });
     }
   }, [chattings]);
+
+  // useEffect(() => {
+  // fetch("/api/v1/summation", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     content: "오늘 배운 내용을 Markdown으로 변환해 주세요.",
+  //   }),
+  // }).then(console.log);
+  // }, []);
   return (
     <main className="flex flex-col items-center mx-auto pt-12 max-w-3xl w-full min-h-full h-full">
       <div ref={containerRef} className="grow w-full overflow-y-auto">
