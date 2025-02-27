@@ -6,6 +6,7 @@ import ChattingPage from "../pages/Chatting";
 import WithHeader from "../layouts/WithHeader";
 import EditChatPage from "../pages/EditChat";
 import Setting from "../pages/Setting";
+import LoginCallback from "../pages/LoginCallback";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export default function AppRouter() {
         {
           path: PATH.LOGIN,
           element: <LoginPage />,
+        },
+        {
+          path: PATH.LOGIN_CALLBACK,
+          element: <LoginCallback />,
         },
       ],
     },
