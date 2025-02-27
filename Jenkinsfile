@@ -56,7 +56,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker build --no-cache --pull -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
+                    docker build --no-cache --pull --build-arg CACHEBUST=$(date +%s) -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
                     docker push ${DOCKER_HUB_REPO}:${NEW_TAG}
                     """
                 }
