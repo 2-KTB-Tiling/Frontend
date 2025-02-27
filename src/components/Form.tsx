@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Chat } from "../types/chat";
 import { v4 as uuidv4 } from "uuid";
 import { convertTIL } from "../apis/llm";
 import { addChat } from "../apis/localStorage";
+import { FaSpinner } from "react-icons/fa";
 
 type FormType = {
   value: string;
@@ -14,7 +15,10 @@ type FormType = {
 export default function Form({ value, onChange, sendChat }: FormType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const submitMessage = async () => {
+    setIsLoading(true);
     const myChat: Chat = {
       id: uuidv4(),
       type: 1,
@@ -41,6 +45,7 @@ export default function Form({ value, onChange, sendChat }: FormType) {
 
     // localStorage에 저장
     addChat(llmChat);
+    setIsLoading(false);
   };
   const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const el = e.target;
@@ -68,6 +73,7 @@ export default function Form({ value, onChange, sendChat }: FormType) {
         }}
       >
         <textarea
+          disabled={isLoading}
           ref={textareaRef}
           value={value}
           onChange={(e) => {
@@ -80,7 +86,11 @@ export default function Form({ value, onChange, sendChat }: FormType) {
           style={{ maxHeight: "384px" }}
         />
         <button type="submit" className="absolute bottom-[24px] right-3">
-          <FaCircleArrowUp className="w-10 h-10 text-accent" />
+          {isLoading ? (
+            <FaSpinner className="animate-spin text-[40px] text-accent" />
+          ) : (
+            <FaCircleArrowUp className="w-10 h-10 text-accent" />
+          )}
         </button>
       </form>
     </section>

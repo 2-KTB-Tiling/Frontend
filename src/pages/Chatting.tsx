@@ -44,7 +44,6 @@ export default function ChattingPage() {
           )}
         </ul>
       </div>
-
       <Form value={value} onChange={setValue} sendChat={addChatting} />
     </main>
   );
