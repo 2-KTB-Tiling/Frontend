@@ -44,7 +44,7 @@ export const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_
 export const githubLogin = async (code: string): Promise<AuthResponse> => {
   try {
     // 로그인은 인증 토큰이 필요 없으므로 기본 인스턴스 사용
-    const response = await instance.post<AuthResponse>('/auth/github', { code });
+    const response = await instance.post<AuthResponse>('auth/github', { code });
     
     // 로그인 성공 시 토큰과 사용자 정보 저장
     if (response.data.message === 'login_success' && response.data.data) {
@@ -69,6 +69,6 @@ export const githubLogin = async (code: string): Promise<AuthResponse> => {
       
       throw new Error(responseData?.message || '인증 처리 중 오류가 발생했습니다.');
     }
-    throw new Error('인증 처리 중 오류가 발생했습니다.');
+    throw new Error('인증 처리 중 오류가 발생했습니다!');
   }
 };
