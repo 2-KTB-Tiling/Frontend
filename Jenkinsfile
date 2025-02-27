@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker build --no-cache -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
+                    docker build --no-cache --pull -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
                     docker push ${DOCKER_HUB_REPO}:${NEW_TAG}
                     """
                 }
