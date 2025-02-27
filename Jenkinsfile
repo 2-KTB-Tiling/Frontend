@@ -12,13 +12,25 @@ pipeline {
             }
         }
 
+        // stage('Checkout Code') {
+        //     steps {
+        //         git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/2-KTB-Tiling/Frontend.git'
+        //         sh 'git fetch --all && git reset --hard origin/main'
+        //     }
+        // }
         stage('Checkout Code') {
-            steps {
-                git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/2-KTB-Tiling/Frontend.git'
-                sh 'git fetch --all && git reset --hard origin/main'
+                steps {
+                    script {
+                        sh """
+                        rm -rf Frontend  # 🔥 기존 폴더 삭제 (캐시 문제 방지)
+                        git clone https://github.com/2-KTB-Tiling/Frontend.git
+                        cd Frontend
+                        git checkout main
+                        """
+                    }
+                }
             }
-        }
-
+        
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', 
