@@ -1,5 +1,9 @@
 import { Chat } from "../types/chat";
 
+export const getToken = () => {
+  return JSON.parse(localStorage.getItem("accessToken") || "");
+};
+
 export const getAllChats = () => {
   return JSON.parse(localStorage.getItem("chats") || "[]");
 };
