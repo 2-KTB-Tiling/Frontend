@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { getToken } from "../localStorage";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -9,7 +8,7 @@ const instance: AxiosInstance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const accessToken = getToken();
+  const accessToken = localStorage.getItem("accessToken") || "";
 
   if (accessToken) {
     const newConfig = config;
