@@ -8,16 +8,15 @@ pipeline {
     stages {
         stage('Clean Workspace') {
             steps {
-                script {
-                    wipeWorkspace()
-                }
-            steps {
                 cleanWs()
             }
         }
 
         stage('Checkout Code') {
             steps {
+                script {
+                    wipeWorkspace()
+                }
                 git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/2-KTB-Tiling/Frontend.git'
             }
         }
