@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Form from "./Form";
 import Chatting from "./Chatting";
-import Viewer from "./Viewer";
+import MarkdownViewer from "./MarkdownViewer";
 import { Chat } from "../types/chat";
 
 export default function ChatContainer() {
@@ -9,8 +9,11 @@ export default function ChatContainer() {
   const [chats, setChats] = useState<Chat[]>([
     // 초기 시스템 메시지 (선택사항)
     {
-      type: -1,
+      id: "system-1", // 문자열 ID 추가
+      type: -1, // 시스템 메시지
       content: "안녕하세요! 오늘 배운 내용을 입력하시면 AI가 TIL 형식으로 변환해 드립니다.",
+      isLoading: false, // 선택적 필드 (기본값 설정)
+      shouldRemove: false, // 선택적 필드 (기본값 설정)
     },
   ]);
   
@@ -60,7 +63,7 @@ export default function ChatContainer() {
                 );
               }
               // 일반 AI 메시지
-              return <Viewer key={index} content={chat.content} />;
+              return <MarkdownViewer key={index} id={chat.id} content={chat.content} />;
             }
           })}
         </ul>
