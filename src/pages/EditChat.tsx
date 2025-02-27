@@ -18,7 +18,7 @@ export default function EditChatPage() {
   };
   const handleDeployClick = async () => {
     // 배포 로직
-    const data = await deployTIL(value, message);
+    await deployTIL(value, message);
 
     navigate(PATH.ROOT);
   };
