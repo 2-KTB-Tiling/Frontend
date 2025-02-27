@@ -7,6 +7,7 @@ import WithHeader from "../layouts/WithHeader";
 import EditChatPage from "../pages/EditChat";
 import Setting from "../pages/Setting";
 import LoginCallback from "../pages/LoginCallback";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -15,7 +16,11 @@ export default function AppRouter() {
       element: <App />,
       children: [
         {
-          element: <WithHeader />,
+          element: (
+            <ProtectedRoute>
+              <WithHeader />
+            </ProtectedRoute>
+          ),
           children: [
             {
               index: true,
