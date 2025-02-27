@@ -4,7 +4,7 @@ import { PiNotebookBold } from "react-icons/pi";
 export default function LoginPage() {
   const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
   const redirectUrl = import.meta.env.VITE_GITHUB_REDIRECT_URI;
-  const githubURL = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=read:user user:email`;
+  const githubURL = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=read:user user:email repo`;
 
   const handleLogin = () => {
     window.location.href = githubURL;
