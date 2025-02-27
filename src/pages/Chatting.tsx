@@ -54,11 +54,12 @@ fetch API와 Markdown을 활용하면, 서버에서 동적으로 콘텐츠를 �
     id: uuidv4(),
     type: -1,
     content: `
-      # 오늘의 TIL
+# 오늘의 TIL
+
 서버 통신과 React 이벤트를 학습했습니다.
+
 - fetch API 활용
-- TailwindCSS 적용
-**실습을 통해 배운 점 정리**
+- TailwindCSS 적용 **실습을 통해 배운 점 정리**
 
     `,
   },
