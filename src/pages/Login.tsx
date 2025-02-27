@@ -1,6 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import { PiNotebookBold } from "react-icons/pi";
-import { GITHUB_AUTH_URL } from "../apis/auth";
+import { GITHUB_AUTH_URL } from "../apis/Auth";
 
 export default function LoginPage() {
   // GitHub 로그인 처리 함수

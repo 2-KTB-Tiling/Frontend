@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Chat } from "../types/chat";
-import { convertTil } from "../apis/til"; // TIL 변환 API import
+import { convertTil } from "../apis/Til"; // TIL 변환 API import
 import { v4 as uuidv4 } from "uuid";
 
 type FormType = {
@@ -35,6 +35,7 @@ export default function Form({ value, onChange, addChat }: FormType) {
     try {
       // 로딩 메시지 표시 (선택사항)
       addChat({
+        id: uuidv4(), // ID 추가
         type: -1, // 시스템 메시지 타입
         content: "TIL을 변환하는 중입니다...",
         isLoading: true,
@@ -45,6 +46,7 @@ export default function Form({ value, onChange, addChat }: FormType) {
 
       // 로딩 메시지가 있다면 제거 (선택사항)
       addChat({
+        id: uuidv4(), // ID 추가
         type: -1, // 시스템 메시지 타입 (임시 로딩 메시지 제거용)
         content: "",
         isLoading: false,
@@ -54,12 +56,14 @@ export default function Form({ value, onChange, addChat }: FormType) {
       if (response.message === 'convert_success' && response.data) {
         // 변환된 마크다운 내용 추가
         addChat({
+          id: uuidv4(), // ID 추가
           type: -1, // 시스템 메시지 타입
           content: response.data.markdown,
         });
       } else {
         // 변환 실패 메시지
         addChat({
+          id: uuidv4(), // ID 추가
           type: -1,
           content: "TIL 변환에 실패했습니다. 다시 시도해주세요.",
         });
@@ -67,6 +71,7 @@ export default function Form({ value, onChange, addChat }: FormType) {
     } catch (error) {
       // 오류 메시지 추가
       addChat({
+        id: uuidv4(), // ID 추가
         type: -1,
         content: "오류가 발생했습니다: " + (error instanceof Error ? error.message : "알 수 없는 오류"),
       });

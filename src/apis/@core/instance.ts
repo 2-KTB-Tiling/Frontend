@@ -8,7 +8,8 @@ const instance: AxiosInstance = axios.create({
   timeout: 15000,
   headers: {
     "Content-Type": "application/json"
-  }
+  },
+  withCredentials: true // 추가: 크로스 도메인 인증을 위해 필요
 });
 
 // 인증된 요청을 위한 인스턴스 - 토큰 포함
@@ -17,7 +18,8 @@ const authInstance: AxiosInstance = axios.create({
   timeout: 15000,
   headers: {
     "Content-Type": "application/json"
-  }
+  },
+  withCredentials: true // 추가: 크로스 도메인 인증을 위해 필요
 });
 
 // 인증 인스턴스에만 토큰 추가 인터셉터 적용

@@ -1,7 +1,7 @@
 // GitHubCallback.tsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { githubLogin } from "../apis/auth";
+import { githubLogin } from "../apis/Auth";
 
 export default function GitHubCallback() {
   const navigate = useNavigate();
