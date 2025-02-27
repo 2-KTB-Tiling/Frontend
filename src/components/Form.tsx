@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Chat } from "../types/chat";
+import { v4 as uuidv4 } from "uuid";
 
 type FormType = {
   value: string;
@@ -14,6 +15,7 @@ export default function Form({ value, onChange, addChat }: FormType) {
   const submitMessage = () => {
     // 메시지 제출 로직 (예: API 호출)
     addChat({
+      id: uuidv4(),
       type: 1,
       content: value,
     });
