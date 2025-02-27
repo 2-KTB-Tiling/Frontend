@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Chat } from "../types/chat";
 import { convertTil } from "../apis/til"; // TIL 변환 API import
+import { v4 as uuidv4 } from "uuid";
 
 type FormType = {
   value: string;
@@ -18,6 +19,7 @@ export default function Form({ value, onChange, addChat }: FormType) {
 
     // 사용자 메시지 추가
     addChat({
+      id: uuidv4(),
       type: 1, // 사용자 메시지 타입
       content: value,
     });

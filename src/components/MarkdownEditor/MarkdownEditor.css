@@ -1,0 +1,19 @@
+.language-markdown {
+  @apply text-black;
+}
+
+.w-md-editor-content pre {
+  @apply text-black;
+}
+
+.w-md-editor-toolbar {
+  @apply px-4 h-12;
+}
+
+.w-md-editor-toolbar ul {
+  @apply flex gap-2;
+}
+
+.w-md-editor-toolbar-divider {
+  @apply h-5;
+}

@@ -1,13 +1,14 @@
-import { PiNotebookBold } from "react-icons/pi";
 import { useEffect, useRef, useState } from "react";
 import Form from "../components/Form";
 import { Chat } from "../types/chat";
 import Chatting from "../components/Chatting";
-import Viewer from "../components/Viewer";
+import MarkdownViewer from "../components/MarkdownViewer";
 import { v4 as uuidv4 } from "uuid";
+import Logo from "../components/Logo";
 
 const initialChattings: Chat[] = [
   {
+    id: uuidv4(),
     type: -1,
     content: `
 # 오늘의 TIL (Today I Learned)
@@ -24,14 +25,14 @@ const initialChattings: Chat[] = [
 
 \`\`\`js
 fetch('https://api.example.com/markdown')
-.then(response => response.text())
-.then(markdown => {
-// 받아온 마크다운 문자열을 상태에 저장하거나 렌더링합니다.
-console.log(markdown);
-})
-.catch(error => {
-console.error('에러 발생:', error);
-});
+  .then(response => response.text())
+  .then(markdown => {
+    // 받아온 마크다운 문자열을 상태에 저장하거나 렌더링합니다.
+    console.log(markdown);
+  })
+  .catch(error => {
+    에러 발생:', error);
+  });
 \`\`\`
 
 ## 마무리
@@ -40,21 +41,25 @@ fetch API와 Markdown을 활용하면, 서버에서 동적으로 콘텐츠를 �
 `,
   },
   {
+    id: uuidv4(),
     type: 1,
     content: "이거 수정해줘.",
   },
   {
+    id: uuidv4(),
     type: 1,
     content: "다시 수정해줘.",
   },
   {
+    id: uuidv4(),
     type: -1,
     content: `
-      # 오늘의 TIL
+# 오늘의 TIL
+
 서버 통신과 React 이벤트를 학습했습니다.
+
 - fetch API 활용
-- TailwindCSS 적용
-**실습을 통해 배운 점 정리**
+- TailwindCSS 적용 **실습을 통해 배운 점 정리**
 
     `,
   },
@@ -83,16 +88,13 @@ export default function ChattingPage() {
   return (
     <main className="flex flex-col items-center mx-auto pt-12 max-w-3xl w-full min-h-full h-full">
       <div ref={containerRef} className="grow w-full overflow-y-auto">
-        <div className="flex justify-center items-center gap-2 mb-20 text-4xl">
-          <PiNotebookBold />
-          <h1 className="font-bold">TILing</h1>
-        </div>
+        <Logo />
         <ul className="flex flex-col gap-6 w-full">
-          {chattings.map(({ type, content }) =>
+          {chattings.map(({ id, type, content }) =>
             type === 1 ? (
-              <Chatting key={uuidv4()} content={content} />
+              <Chatting key={id} content={content} />
             ) : (
-              <Viewer key={uuidv4()} content={content} />
+              <MarkdownViewer key={id} id={id} content={content} />
             )
           )}
         </ul>

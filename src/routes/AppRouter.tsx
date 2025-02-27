@@ -5,6 +5,7 @@ import LoginPage from "../pages/Login";
 import ChattingPage from "../pages/Chatting";
 import WithHeader from "../layouts/WithHeader";
 import GitHubCallback from "../pages/GitHubCallback"; // GitHub 콜백 컴포넌트 import
+import EditChatPage from "../pages/EditChat";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ export default function AppRouter() {
             {
               index: true,
               element: <ChattingPage />,
+            },
+            {
+              path: PATH.EDIT,
+              element: <EditChatPage />,
             },
           ],
         },
