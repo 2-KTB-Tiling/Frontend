@@ -4,13 +4,14 @@ import { Chat } from "../types/chat";
 import Chatting from "../components/Chatting";
 import MarkdownViewer from "../components/MarkdownViewer";
 import Logo from "../components/Logo";
+import { getAllChats } from "../apis/localStorage";
 
 export default function ChattingPage() {
   // 스크롤 컨테이너용 ref
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [value, setValue] = useState("");
-  const [chattings, setChattings] = useState<Chat[]>([]);
+  const [chattings, setChattings] = useState<Chat[]>(() => getAllChats());
 
   const addChatting = (newChat: Chat) => {
     setChattings((prev) => [...prev, newChat]);
@@ -40,7 +41,7 @@ export default function ChattingPage() {
         </ul>
       </div>
 
-      <Form value={value} onChange={setValue} addChat={addChatting} />
+      <Form value={value} onChange={setValue} sendChat={addChatting} />
     </main>
   );
 }

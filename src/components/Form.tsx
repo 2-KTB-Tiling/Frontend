@@ -3,23 +3,27 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 import { Chat } from "../types/chat";
 import { v4 as uuidv4 } from "uuid";
 import { convertTIL } from "../apis/llm";
+import { addChat } from "../apis/localStorage";
 
 type FormType = {
   value: string;
   onChange: (value: string) => void;
-  addChat: (newChat: Chat) => void;
+  sendChat: (newChat: Chat) => void;
 };
 
-export default function Form({ value, onChange, addChat }: FormType) {
+export default function Form({ value, onChange, sendChat }: FormType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const submitMessage = async () => {
-    // 메시지 제출 로직 (예: API 호출)
-    addChat({
+    const myChat: Chat = {
       id: uuidv4(),
       type: 1,
       content: value,
-    });
+    };
+    sendChat(myChat);
+
+    // localStorage에 저장
+    addChat(myChat);
 
     // 제출 후 값 초기화 및 높이 리셋
     onChange("");
@@ -28,12 +32,15 @@ export default function Form({ value, onChange, addChat }: FormType) {
     }
 
     const data = await convertTIL(value);
-
-    addChat({
+    const llmChat: Chat = {
       id: uuidv4(),
       type: -1,
       content: data.data.markdown,
-    });
+    };
+    sendChat(llmChat);
+
+    // localStorage에 저장
+    addChat(llmChat);
   };
   const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const el = e.target;
