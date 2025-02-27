@@ -11,3 +11,9 @@ body {
   @apply mx-auto;
   @apply w-full h-full;
 }
+
+.custom-progress-bar {
+  background: #4f46e5 !important;
+  height: 4px !important;
+  border-radius: 2px !important;
+}
