@@ -28,7 +28,7 @@ export default function Form({ value, onChange, addChat }: FormType) {
     }
 
     const data = await convertTIL(value);
-    console.log(data);
+
     addChat({
       id: uuidv4(),
       type: -1,
