@@ -7,3 +7,12 @@ export const setRepoUrl = async (url: string) => {
 
   return data;
 };
+
+export const deployTIL = async (content: string, commit_message: string) => {
+  const data = await instance.post("/upload/github", {
+    content,
+    commit_message,
+  });
+
+  return data;
+};
