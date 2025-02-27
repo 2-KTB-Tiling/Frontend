@@ -8,6 +8,10 @@ pipeline {
     stages {
         stage('Clean Workspace') {
             steps {
+                script {
+                    wipeWorkspace()
+                }
+            steps {
                 cleanWs()
             }
         }
