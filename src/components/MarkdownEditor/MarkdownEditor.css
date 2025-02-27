@@ -6,6 +6,11 @@
   @apply text-black;
 }
 
+.w-md-editor-area.w-md-editor-input,
+.w-md-editor-preview {
+  @apply py-10;
+}
+
 .w-md-editor-toolbar {
   @apply px-4 h-12;
 }

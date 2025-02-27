@@ -1,17 +1,18 @@
 import MDEditor from "@uiw/react-md-editor";
 import "@uiw/react-md-editor/markdown-editor.css";
-import { useState } from "react";
 import "./MarkdownEditor.css";
 
 type MarkdownEditorType = {
-  content: string;
+  value: string;
+  onChange: (content: string) => void;
 };
 
-export default function MarkdownEditor({ content }: MarkdownEditorType) {
-  const [value, setValue] = useState<string>(content || "");
-
+export default function MarkdownEditor({
+  value,
+  onChange,
+}: MarkdownEditorType) {
   return (
-    <section className="mb-10 w-full overflow-y-auto">
+    <section className="mb-8 px-4 w-full overflow-y-auto">
       <MDEditor
         data-color-mode="light"
         className="prose w-full min-w-full border border-border"
@@ -21,7 +22,7 @@ export default function MarkdownEditor({ content }: MarkdownEditorType) {
         maxHeight={600}
         value={value}
         onChange={(value) => {
-          setValue(value || "");
+          onChange(value || "");
         }}
       />
     </section>
