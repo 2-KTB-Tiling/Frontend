@@ -5,16 +5,20 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { PATH } from "../constants/routes";
 
-type ViewerType = {
+type MarkdownViewerType = {
   id: string;
   content: string;
 };
 
-export default function Viewer({ id, content }: ViewerType) {
+export default function MarkdownViewer({ id, content }: MarkdownViewerType) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(PATH.EDIT.replace(":id", id));
+    navigate(PATH.EDIT.replace(":id", id), {
+      state: {
+        content,
+      },
+    });
   };
   return (
     <li

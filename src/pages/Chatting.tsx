@@ -1,10 +1,10 @@
-import { PiNotebookBold } from "react-icons/pi";
 import { useEffect, useRef, useState } from "react";
 import Form from "../components/Form";
 import { Chat } from "../types/chat";
 import Chatting from "../components/Chatting";
-import Viewer from "../components/Viewer";
+import MarkdownViewer from "../components/MarkdownViewer";
 import { v4 as uuidv4 } from "uuid";
+import Logo from "../components/Logo";
 
 const initialChattings: Chat[] = [
   {
@@ -87,16 +87,13 @@ export default function ChattingPage() {
   return (
     <main className="flex flex-col items-center mx-auto pt-12 max-w-3xl w-full min-h-full h-full">
       <div ref={containerRef} className="grow w-full overflow-y-auto">
-        <div className="flex justify-center items-center gap-2 mb-20 text-4xl">
-          <PiNotebookBold />
-          <h1 className="font-bold">TILing</h1>
-        </div>
+        <Logo />
         <ul className="flex flex-col gap-6 w-full">
           {chattings.map(({ id, type, content }) =>
             type === 1 ? (
               <Chatting key={id} content={content} />
             ) : (
-              <Viewer key={id} id={id} content={content} />
+              <MarkdownViewer key={id} id={id} content={content} />
             )
           )}
         </ul>
