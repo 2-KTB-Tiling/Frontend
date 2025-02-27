@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { FaCircleArrowUp } from "react-icons/fa6";
 import { Chat } from "../types/chat";
 import { v4 as uuidv4 } from "uuid";
+import { convertTIL } from "../apis/llm";
 
 type FormType = {
   value: string;
@@ -12,7 +13,7 @@ type FormType = {
 export default function Form({ value, onChange, addChat }: FormType) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const submitMessage = () => {
+  const submitMessage = async () => {
     // 메시지 제출 로직 (예: API 호출)
     addChat({
       id: uuidv4(),
@@ -25,6 +26,14 @@ export default function Form({ value, onChange, addChat }: FormType) {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
     }
+
+    const data = await convertTIL(value);
+
+    addChat({
+      id: uuidv4(),
+      type: -1,
+      content: data.data.markdown,
+    });
   };
   const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const el = e.target;
