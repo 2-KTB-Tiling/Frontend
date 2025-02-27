@@ -9,6 +9,7 @@ import { getAllChats } from "../apis/localStorage";
 export default function ChattingPage() {
   // 스크롤 컨테이너용 ref
   const containerRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const [value, setValue] = useState("");
   const [chattings, setChattings] = useState<Chat[]>(() => getAllChats());
@@ -22,9 +23,12 @@ export default function ChattingPage() {
     if (containerRef.current) {
       containerRef.current.scrollTo({
         top: containerRef.current.scrollHeight,
-        behavior: "smooth",
+        behavior: isFirstRender.current ? "instant" : "smooth",
       });
     }
+
+    // 첫 렌더링 이후 `smooth`가 적용되도록 변경
+    isFirstRender.current = false;
   }, [chattings]);
   return (
     <main className="flex flex-col items-center mx-auto pt-12 max-w-3xl w-full min-h-full h-full">
