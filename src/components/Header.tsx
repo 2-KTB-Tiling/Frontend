@@ -8,12 +8,9 @@ export default function Header() {
       <Link to={PATH.ROOT} className="text-xl font-bold">
         TILing
       </Link>
-      <div className="flex items-center gap-4">
-        <Link to={PATH.LOGIN}>로그인</Link>
-        <Link to={PATH.SETTING}>
-          <IoSettingsSharp className="text-border hover:text-dark-text transition-colors text-2xl" />
-        </Link>
-      </div>
+      <Link to={PATH.SETTING}>
+        <IoSettingsSharp className="text-border hover:text-dark-text transition-colors text-2xl" />
+      </Link>
     </header>
   );
 }
