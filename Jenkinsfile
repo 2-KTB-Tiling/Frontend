@@ -18,18 +18,22 @@ pipeline {
         //         sh 'git fetch --all && git reset --hard origin/main'
         //     }
         // }
+
         stage('Checkout Code') {
-                steps {
-                    script {
-                        sh """
-                        rm -rf Frontend  # 🔥 기존 폴더 삭제 (캐시 문제 방지)
-                        git clone https://github.com/2-KTB-Tiling/Frontend.git
-                        cd Frontend
-                        git checkout main
-                        """
-                    }
-                }
-            }
+    steps {
+        script {
+            sh """
+            rm -rf Frontend  # 기존 코드를 완전히 삭제
+            git clone https://github.com/2-KTB-Tiling/Frontend.git
+            cd Frontend
+            git fetch --all
+            git reset --hard origin/main
+            git clean -fdx  # 불필요한 파일 삭제
+            """
+        }
+    }
+}
+
         
         stage('Login to Docker Hub') {
             steps {
