@@ -5,6 +5,7 @@ import LoginPage from "../pages/Login";
 import ChattingPage from "../pages/Chatting";
 import WithHeader from "../layouts/WithHeader";
 import EditChatPage from "../pages/EditChat";
+import Setting from "../pages/Setting";
 
 export default function AppRouter() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export default function AppRouter() {
             {
               path: PATH.EDIT,
               element: <EditChatPage />,
+            },
+            {
+              path: PATH.SETTING,
+              element: <Setting />,
             },
           ],
         },
