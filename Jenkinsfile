@@ -14,10 +14,8 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                script {
-                    wipeWorkspace()
-                }
-                git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/2-KTB-Tiling/Frontend.git'
+                wipeWorkspace()  // ✅ script 블록 밖에서 실행
+                git branch: 'main', credentialsId: 'github_token', url: 'https://github.com/2-KTB-Tiling/python-ai-deploy.git'
             }
         }
 
