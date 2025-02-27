@@ -25,14 +25,14 @@ const initialChattings: Chat[] = [
 
 \`\`\`js
 fetch('https://api.example.com/markdown')
-.then(response => response.text())
-.then(markdown => {
-// 받아온 마크다운 문자열을 상태에 저장하거나 렌더링합니다.
-console.log(markdown);
-})
-.catch(error => {
-console.error('에러 발생:', error);
-});
+  .then(response => response.text())
+  .then(markdown => {
+    // 받아온 마크다운 문자열을 상태에 저장하거나 렌더링합니다.
+    console.log(markdown);
+  })
+  .catch(error => {
+    에러 발생:', error);
+  });
 \`\`\`
 
 ## 마무리

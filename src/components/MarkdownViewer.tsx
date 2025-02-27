@@ -1,7 +1,7 @@
 import Markdown from "react-markdown";
 import { useNavigate } from "react-router";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { okaidia } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { PATH } from "../constants/routes";
 
@@ -36,7 +36,7 @@ export default function MarkdownViewer({ id, content }: MarkdownViewerType) {
                 {...rest}
                 PreTag="div"
                 language={match[1]}
-                style={atomDark}
+                style={okaidia}
               >
                 {String(children).replace(/\n$/, "")}
               </SyntaxHighlighter>
