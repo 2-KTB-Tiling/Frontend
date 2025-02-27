@@ -54,12 +54,8 @@ fetch API와 Markdown을 활용하면, 서버에서 동적으로 콘텐츠를 �
     id: uuidv4(),
     type: -1,
     content: `
-# 오늘의 TIL
 
-서버 통신과 React 이벤트를 학습했습니다.
-
-- fetch API 활용
-- TailwindCSS 적용 **실습을 통해 배운 점 정리**
+    날짜: 2023-10-10\n\n### 📌 스크럼\n- 학습 목표 1: Nest.js의 기본 구조 이해\n- 학습 목표 2: 모듈 및 서비스 개념 학습\n- 학습 목표 3: RESTful API 구현 실습\n\n### 📖 새로 배운 내용\n\n#### 🔹 주제 1: Nest.js 기본 구조\n📌 Nest.js는 모듈화된 구조\n- 모듈은 관련된 기능을 그룹화\n- Controller, Service, Module로 구성\n\n#### 🔹 주제 2: RESTful API 구현\n📌 RESTful API를 쉽게 구현\n- GET, POST, PUT, DELETE 메서드 사용\n- DTO(Data Transfer Object)를 활용하여 데이터 유효성 검사\n\n### 🎯 오늘의 도전 과제와 해결 방법\n- 도전 과제 1: Nest.js 설치 과정에서 오류 발생  \n  → Node.js와 npm 버전 확인 후 재설치\n- 도전 과제 2: RESTful API 테스트 도구 사용  \n  → Postman을 활용하여 API 요청 테스트\n\n### 📝 오늘의 회고\n- Nest.js의 구조가 직관적이라 이해하기 쉬웠음 \n- 실습을 통해 RESTful API의 작동 방식이 명확해짐\n\n### 🔗 참고 자료 및 링크\n- Nest.js 공식 문서
 
     `,
   },
