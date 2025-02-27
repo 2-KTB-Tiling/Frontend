@@ -3,4 +3,5 @@ export const PATH = {
   LOGIN: "/login",
   EDIT: "/edit/:id",
   SETTING: "/setting",
+  LOGIN_CALLBACK: "/auth/callback",
 };
