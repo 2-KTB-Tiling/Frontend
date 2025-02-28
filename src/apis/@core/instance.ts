@@ -5,7 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const instance: AxiosInstance = axios.create({
   baseURL: apiUrl,
   timeout: 15000,
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 instance.interceptors.request.use((config) => {
