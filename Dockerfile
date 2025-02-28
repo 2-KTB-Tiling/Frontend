@@ -11,6 +11,9 @@ RUN npm install
 # 소스 코드 복사
 COPY . .
 
+ARG ENV_FILE
+COPY ${ENV_FILE} .env
+
 # Vite 빌드 실행
 RUN npm run build
 
@@ -20,6 +23,8 @@ FROM nginx:alpine
 
 # Nginx 설정 파일 복사
 COPY --from=builder /app/dist /usr/share/nginx/html
+
+COPY --from=builder /app/.env .env
 
 # Nginx 포트 열기
 EXPOSE 80
