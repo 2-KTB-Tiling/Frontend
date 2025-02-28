@@ -52,13 +52,16 @@ pipeline {
             }
         }
 
-        stage('Build & Push Frontend Image') {
+        stage('Build & Push backend Image') {
             steps {
-                script {
-                    sh """
-                    docker build --no-cache --pull -t ${DOCKER_HUB_REPO}:${NEW_TAG} -f Dockerfile .
-                    docker push ${DOCKER_HUB_REPO}:${NEW_TAG}
-                    """
+                withCredentials([file(credentialsId: 'front-key', variable: 'SECRET_ENV')]) {
+                    script {
+                        sh """
+                        cp $SECRET_ENV .env
+                        docker build -t ${DOCKER_HUB_REPO}:${NEW_TAG} --build-arg ENV_FILE=.env -f Dockerfile .
+                        docker push ${DOCKER_HUB_REPO}:${NEW_TAG}
+                        """
+                    }
                 }
             }
         }
