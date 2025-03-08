@@ -70,6 +70,23 @@ pipeline {
             }
         }
 
+        stage('Deploy to EC2 with Docker Compose') {
+            steps {
+                script {
+                    sh """
+                    echo "🚀 배포 서버에 Docker Compose 적용 중..."
+                    ssh -o StrictHostKeyChecking=no -i /home/ubuntu/kakao_key.pem ubuntu@ec2-3-36-132-43.ap-northeast-2.compute.amazonaws.com << 'EOF'
+                    sudo docker pull ${DOCKER_HUB_REPO}:${NEW_TAG}
+                    sudo docker-compose -f /home/ubuntu/docker-compose.yml down
+                    sudo sed -i 's|image: luckyprice1103/tiling-frontend:.*|image: luckyprice1103/tiling-frontend:${NEW_TAG}|' /home/ubuntu/docker-compose.yml
+                    sudo docker-compose -f /home/ubuntu/docker-compose.yml up -d
+                    EOF
+                    echo "✅ Docker Compose 배포 완료!"
+                    """
+                }
+            }
+        }
+
         // stage('Update GitHub Deployment YAML') {
         //     steps {
         //         withCredentials([usernamePassword(credentialsId: 'github_token', 
