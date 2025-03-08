@@ -71,25 +71,36 @@ pipeline {
         stage('Deploy to EC2 with Docker Compose') {
             steps {
                 script {
-                    def newTag = env.NEW_TAG  // 🔹 NEW_TAG 값을 가져오기
+                    def newTag = env.NEW_TAG  // ✅ NEW_TAG 값 가져오기
 
                     sh """
                     echo "🚀 배포 서버에 Docker Compose 적용 중..."
 
                     # 🔹 SSH 접속하여 Docker Compose 배포 실행
-                    ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa ubuntu@${DEPLOY_SERVER} << EOF
-                    export NEW_TAG=${newTag}  # 🔹 NEW_TAG 값을 환경 변수로 설정
+                    ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa ubuntu@${DEPLOY_SERVER} << 'EOF'
+                    export NEW_TAG=${newTag}  # ✅ NEW_TAG 값을 환경 변수로 설정
+                    echo "✅ NEW_TAG=\$NEW_TAG"
+
+                    # 🔹 최신 이미지 Pull
                     sudo docker pull ${DOCKER_HUB_REPO}:\$NEW_TAG
+
+                    # 🔹 기존 컨테이너 종료
                     sudo docker-compose -f /home/ubuntu/docker-compose.yml down
+
+                    # 🔹 docker-compose.yml 최신 이미지 태그로 변경
                     sudo sed -i 's|image: luckyprice1103/tiling-frontend:.*|image: luckyprice1103/tiling-frontend:\$NEW_TAG|' /home/ubuntu/docker-compose.yml
+                    echo "✅ docker-compose.yml 수정 완료"
+
+                    # 🔹 최신 버전으로 컨테이너 실행
                     sudo docker-compose -f /home/ubuntu/docker-compose.yml up -d
-                    EOF
 
                     echo "✅ Docker Compose 배포 완료!"
+                    EOF
                     """
                 }
             }
         }
+
 
 
 
