@@ -85,38 +85,19 @@ pipeline {
         }
 
         stage('Trigger CodeDeploy') {
-    steps {
-        script {
-            echo "🚀 AWS CodeDeploy 배포 시작..."
-
-            // 현재 진행 중인 배포 확인 후 중지
-            def currentDeploymentId = sh(
-                script: """
-                aws deploy list-deployments \
-                    --application-name ${CODEDEPLOY_APP} \
-                    --deployment-group-name ${CODEDEPLOY_GROUP} \
-                    --query 'deployments[0]' --output text
-                """,
-                returnStdout: true
-            ).trim()
-
-            if (currentDeploymentId && currentDeploymentId != "None") {
-                echo "🛑 기존 배포 중지 중: ${currentDeploymentId}"
-                sh "aws deploy stop-deployment --deployment-id ${currentDeploymentId}"
-                sleep(5)  // 기존 배포가 완전히 종료될 시간을 주기
+            steps {
+                script {
+                    sh """
+                    echo "🚀 AWS CodeDeploy 배포 시작..."
+                    aws deploy create-deployment \
+                        --application-name ${CODEDEPLOY_APP} \
+                        --deployment-group-name ${CODEDEPLOY_GROUP} \
+                        --s3-location bucket=${S3_BUCKET},bundleType=zip,key=frontend.zip
+                    echo "✅ CodeDeploy 배포 요청 완료"
+                    """
+                }
             }
-
-            // 새로운 배포 실행
-            sh """
-            aws deploy create-deployment \
-                --application-name ${CODEDEPLOY_APP} \
-                --deployment-group-name ${CODEDEPLOY_GROUP} \
-                --s3-location bucket=${S3_BUCKET},bundleType=zip,key=frontend.zip
-            echo "✅ CodeDeploy 배포 요청 완료"
-            """
         }
-    }
-}
 
         // stage('Update GitHub Deployment YAML') {
         //     steps {
