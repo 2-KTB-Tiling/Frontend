@@ -67,24 +67,35 @@ pipeline {
             }
         }
 
-        stage('Deploy to EC2 with Docker Compose') {
+                stage('Deploy to EC2 with Docker Compose') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'deploy-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     script {
                         sh """
                         echo "🚀 배포 서버에 Docker Compose 적용 중..."
-                        ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@${DEPLOY_SERVER} << 'EOF'
+
+                        # 🔹 SSH Key를 임시 파일로 저장
+                        echo "$SSH_KEY" > /tmp/deploy_key.pem
+                        chmod 400 /tmp/deploy_key.pem
+
+                        # 🔹 SSH 접속하여 Docker Compose 배포 실행
+                        ssh -o StrictHostKeyChecking=no -i /tmp/deploy_key.pem ubuntu@${DEPLOY_SERVER} << 'EOF'
                         sudo docker pull ${DOCKER_HUB_REPO}:${NEW_TAG}
                         sudo docker-compose -f /home/ubuntu/docker-compose.yml down
                         sudo sed -i 's|image: luckyprice1103/tiling-frontend:.*|image: luckyprice1103/tiling-frontend:${NEW_TAG}|' /home/ubuntu/docker-compose.yml
                         sudo docker-compose -f /home/ubuntu/docker-compose.yml up -d
                         EOF
+
+                        # 🔹 사용 후 SSH Key 파일 삭제 (보안 유지)
+                        rm -f /tmp/deploy_key.pem
+
                         echo "✅ Docker Compose 배포 완료!"
                         """
                     }
                 }
             }
         }
+
 
         // stage('Update GitHub Deployment YAML') {
         //     steps {
