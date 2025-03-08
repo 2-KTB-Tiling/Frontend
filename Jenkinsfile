@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_REPO = "luckyprice1103/tiling-frontend"
+        DEPLOY_SERVER = "ec2-3-36-132-43.ap-northeast-2.compute.amazonaws.com"
 
     }
 
