@@ -78,7 +78,7 @@ pipeline {
                     echo "🔹 배포할 버전: ${newTag}"
 
                     # 🔹 SSH 접속하여 Docker Compose 배포 실행
-                    ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa ubuntu@${DEPLOY_SERVER} << EOF
+                    ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa ubuntu@${DEPLOY_SERVER} <<EOF
                     echo "✅ SSH 접속 완료!"
 
                     # 🔹 환경 변수 설정
