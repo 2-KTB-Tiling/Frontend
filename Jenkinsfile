@@ -75,9 +75,13 @@ pipeline {
                 script {
                     sh """
                     echo "📦 배포 패키지 압축 중..."
-                    echo "NEW_TAG=${NEW_TAG}" > scripts/.deploy_env
-                    zip -r deployment.zip appspec.yml scripts/
-                    aws s3 cp deployment.zip s3://${S3_BUCKET}/frontend.zip
+                    mkdir -p frontend/scripts  # ✅ frontend/scripts 폴더 강제 생성
+                    echo "NEW_TAG=${NEW_TAG}" > frontend/scripts/.deploy_env
+                    cp -r scripts/* frontend/scripts/  # ✅ scripts 폴더를 frontend/scripts로 이동
+                    cp appspec.yml frontend/  # ✅ appspec.yml도 frontend 폴더로 이동
+                    cd frontend
+                    zip -r ../frontend.zip .  # ✅ frontend.zip 생성 (전체 폴더 구조 유지)
+                    aws s3 cp ../frontend.zip s3://${S3_BUCKET}/frontend.zip
                     echo "✅ 배포 패키지 S3 업로드 완료"
                     """
                 }
