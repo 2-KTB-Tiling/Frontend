@@ -70,39 +70,6 @@ pipeline {
             }
         }
 
-        stage('Create Deployment Package') {
-            steps {
-                script {
-                    sh """
-                    echo "📦 배포 패키지 압축 중..."
-                    mkdir -p frontend/scripts  # ✅ frontend/scripts 폴더 강제 생성
-                    echo "NEW_TAG=${NEW_TAG}" > frontend/scripts/.deploy_env
-                    cp -r scripts/* frontend/scripts/  # ✅ scripts 폴더를 frontend/scripts로 이동
-                    cp appspec.yml frontend/  # ✅ appspec.yml도 frontend 폴더로 이동
-                    cd frontend
-                    zip -r ../frontend.zip .  # ✅ frontend.zip 생성 (전체 폴더 구조 유지)
-                    aws s3 cp ../frontend.zip s3://${S3_BUCKET}/frontend.zip
-                    echo "✅ 배포 패키지 S3 업로드 완료"
-                    """
-                }
-            }
-        }
-
-        stage('Trigger CodeDeploy') {
-            steps {
-                script {
-                    sh """
-                    echo "🚀 AWS CodeDeploy 배포 시작..."
-                    aws deploy create-deployment \
-                        --application-name ${CODEDEPLOY_APP} \
-                        --deployment-group-name ${CODEDEPLOY_GROUP} \
-                        --s3-location bucket=${S3_BUCKET},bundleType=zip,key=frontend.zip
-                    echo "✅ CodeDeploy 배포 요청 완료"
-                    """
-                }
-            }
-        }
-
         // stage('Update GitHub Deployment YAML') {
         //     steps {
         //         withCredentials([usernamePassword(credentialsId: 'github_token', 
