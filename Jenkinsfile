@@ -78,7 +78,7 @@ pipeline {
                     echo "🔹 배포할 버전: ${newTag}"
 
                     # 🔹 SSH 접속하여 Docker Compose 배포 실행
-                    ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa ubuntu@${DEPLOY_SERVER} << EOF
+                    ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/.ssh/id_rsa ubuntu@${DEPLOY_SERVER} <<EOF
                     echo "✅ SSH 접속 완료!"
 
                     # 🔹 환경 변수 설정
@@ -92,7 +92,6 @@ pipeline {
 
                     # 🔹 최신 버전으로 컨테이너 실행
                     sudo docker-compose --env-file /home/ubuntu/.env -f /home/ubuntu/docker-compose.yml up -d
-
                     echo "✅ Docker Compose 배포 완료!"
                     EOF
                     """
