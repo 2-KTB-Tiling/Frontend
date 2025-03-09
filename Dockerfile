@@ -54,5 +54,5 @@ COPY ${ENV_FILE} .env
 EXPOSE 5173
 
 # Vite 개발 서버 실행 (네트워크 외부에서 접근 가능하도록 --host 옵션 추가)
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
