@@ -93,7 +93,7 @@ pipeline {
                     # 🔹 최신 버전으로 컨테이너 실행
                     sudo docker-compose --env-file /home/ubuntu/.env -f /home/ubuntu/docker-compose.yml up -d
                     echo "✅ Docker Compose 배포 완료!!"
-                    << EOF
+                    `EOF'
                     """
                 }
             }
